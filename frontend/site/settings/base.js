@@ -1,9 +1,8 @@
 var settings = {
-  "project_name": "Paul Rodriguez by Aaron Marquez",
-  "analytics_ua": "",
-  "static_uri" : "/static",
-  "root_deploy" : "", 
-  "template_ext": ".html"
-}
+  project_name: "",
+  analytics_ua: "",
+  static_uri : "/static",
+  root_deploy : "",
+  }
 
 module.exports = settings;
