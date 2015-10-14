@@ -1,0 +1,59 @@
+.Overlay
+  background-color black
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  z-index 40
+  display none
+  transition opacity 1.5s  ease-out
+  opacity .95
+
+.Modal
+  position absolute
+  z-index 50
+  display none
+  top 50px
+    
+  &.isShow
+    opacity 1
+
+  &.isLoading
+    .modal-loadingOverlay
+      opacity 1
+
+  .Modal-loadingOverlay
+    opacity 0
+
+  .Modal-close
+    @extends .sp-icon-close-modal
+    position absolute
+    top -45px
+    right 0
+    z-index 60
+
+    &:hover
+      cursor pointer
+      @extends .sp-icon-close-modal:hover
+    
+  .Modal-body
+    position relative
+    z-index 60
+    
+    img
+      max-width 480px
+      margin 0 auto
+      display block
+    
+
+    h3
+      color #00528d
+      font-size 14px
+      @extends .gotham-ultra-font
+
+      small
+        @extends .gotham-ultra-font
+        color #3ba1d6
+        font-size 16px
+        text-transform capitalize

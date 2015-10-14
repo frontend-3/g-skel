@@ -1,0 +1,88 @@
+extend _layout
+
+prepend html
+  - custom.title = 'Profile'
+  - custom.body_cls = 'body--profile'
+
+block main
+  .Register
+    h2.Register-title Profile
+    form.Register-form(
+      method="post",
+      action!="{% url 'profile' %}",
+      data-tracking-category = "",
+      data-tracking-action = "",
+      data-tracking-label = "",
+      data-custom-form = "false")
+      {% csrf_token %}
+
+      - config_first_name = {};
+      - config_first_name.name = "first_name"
+      - config_first_name.label = "Nombres"
+      +input_text(config_first_name)
+
+      - config_last_name = {};
+      - config_last_name.name = "last_name"
+      - config_last_name.label = "Apellidos"
+      +input_text(config_last_name)
+
+      - config_document = {};
+      - config_document.name = "document_number"
+      - config_document.label = "Dni"
+      - config_document.minLength = 8
+      +input_number(config_document)
+
+      - config_email = {};
+      - config_email.name = "email"
+      - config_email.label = "Correo Electrónico"
+      +input_email(config_email)
+
+      - config_phone = {};
+      - config_phone.name = "phone"
+      - config_phone.label = "Teléfono"
+      +input_number(config_phone)
+
+      - config_departament = {};
+      - config_departament.name = "cod_dpto"
+      - config_departament.label = "Departamento"
+      - config_departament.var_name = "departments"
+      +select(config_departament)
+
+      - config_province = {};
+      - config_province.name = "cod_prov"
+      - config_province.label = "Provincia"
+      - config_province.isAjax = true
+      - config_province.dataSource = "{% url 'provinces' %}"
+      +select(config_province)
+
+      - config_district = {};
+      - config_district.name = "cod_dist"
+      - config_district.label = "Distrito"
+      - config_district.isAjax = true
+      - config_district.dataSource = "{% url 'districts' %}"
+      +select(config_district)
+
+      - config_address = {};
+      - config_address.name = "address"
+      - config_address.label = "Dirección"
+      +input_text(config_address)
+
+      - config_password = {};
+      - config_password.name = "password"
+      - config_password.label = "Contraseña"
+      - config_password.minLength = 2
+      - config_password.referenceConfirm = '#confirm_password'
+
+      +input_password(config_password)
+
+      - config_confirm_password = {};
+      - config_confirm_password.name = "confirm_password"
+      - config_confirm_password.label = "Confirmar contraseña"
+      - config_confirm_password.minLength = 2
+      +input_password(config_confirm_password)
+
+      button(type="submit", id="ButtonSend") Guardar
+
+
+block scripts
+  +requireTag('site.user.register')

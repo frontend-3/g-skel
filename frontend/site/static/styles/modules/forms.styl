@@ -1,0 +1,151 @@
+/*::-webkit-input-placeholder
+  color #59b7e8
+  text-transform none
+  font-style italic
+
+:-moz-placeholder
+  color #59b7e8
+  text-transform none
+  font-style italic
+
+::-moz-placeholder
+  color #59b7e8
+  text-transform none
+  font-style italic
+
+:-ms-input-placeholder
+  color #59b7e8
+  text-transform none
+  font-style italic*/
+
+.RowForm
+  @extends .clearfix
+
+.ElementForm
+  margin 0 0 20px 0
+  &.is-error
+    input
+      border 1px solid #e6262f
+
+
+.ElementForm-statement
+  position relative
+
+.ElementForm-label
+  color black
+  display inline-block
+  font-size 14px
+  width 120px
+
+  &.is-error
+    margin 5px 0 0
+
+.ElementForm-label--checkbox  
+  /*max-width 385px*/
+  font-size 14px
+  margin 0 0 0 10px
+  width 100%
+  vertical-align middle
+  display inline
+
+.ElementForm-input  
+  border 1px solid #2b9fe9  
+  display inline-block
+  padding 10px
+  width 335px
+
+.ElementForm-contentCheckBox
+  display inline-block
+  width 12px
+  height 11px
+  position relative
+  vertical-align middle
+  
+  &.is-checked
+    .ElementForm-checkBoxIcon
+      @extends .sp-form-checkbox-active
+    
+  .ElementForm-checkBoxIcon
+    @extends .sp-form-checkbox
+
+  input
+    opacity 0
+    display block
+    height 100%
+    width 100%
+    position absolute
+    top 0
+
+.ElementForm-errorContent
+  label
+    display  block
+    text-align left    
+    font-size 12px
+    color #ffd200
+    width 100%
+    padding 0 0 0 123px
+
+.ElementForm-select  
+  border 1px solid #2b9fe9
+  padding 10px 0
+  width 334px
+  display inline-block
+  position relative
+  height 40px
+  vertical-align middle
+  
+  &.is-disabled
+    .ElementForm-selectText
+    .ElementForm-selectIcon
+      opacity .6
+
+  .ElementForm-selectText    
+    font-family 'Arial'
+    padding 0 0 0 5px
+    text-transform uppercase
+  
+  .ElementForm-selectIcon
+    position absolute
+    right 20px
+    top 15px
+    @extends .sp-form-arrow
+
+  select
+    position absolute
+    opacity 0
+    top 0
+    bottom 0
+    left 0
+    width 100%
+
+.ElementForm--captcha
+  label
+  .ElementForm-captchaWrapper
+    display inline-block
+    
+
+.ElementForm-captchaContent  
+  .ElementForm-captchaImgContent
+  .ElementForm-captchaRefreshContent
+    display inline-block
+    vertical-align middle
+  
+  .ElementForm-captchaRefreshContent
+    background grey
+    padding  5px
+    
+    &:active
+      background black
+    
+    &:hover
+      cursor pointer
+    
+    span
+      display block
+      @extends .sp-form-refresh-captcha
+  
+  .ElementForm-captchaImgContent
+    width 120px
+    height 40px
+    img
+      display block

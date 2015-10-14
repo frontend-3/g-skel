@@ -1,0 +1,12 @@
+extend ../_layout
+
+prepend html
+  - custom.title = 'Términos y Condiciones'
+  - custom.body_cls = 'body--tyc'
+
+block main
+  section
+    h2 Terminos y condiciones
+
+block scripts
+  +requireTag('site.register')

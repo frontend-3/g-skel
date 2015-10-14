@@ -1,0 +1,39 @@
+extends _layout
+
+block main
+  form.Register-form(
+    method="post",
+    action!="{% url 'login' %}",
+    data-tracking-category = "",
+    data-tracking-action = "",
+    data-tracking-label = "",
+    data-custom-form = "false"
+  )
+    {% csrf_token %}
+    - config_email = {};
+    - config_email.name = "email"
+    - config_email.label = "Correo Electrónico"
+    - config_email.minLength = 2
+    +input_email(config_email)
+
+    - config_password = {};
+    - config_password.name = "password"
+    - config_password.label = "Contraseña"
+    - config_password.minLength = 2
+    +input_password(config_password)
+
+    {% if show_captcha %}
+    - config_captcha = {};
+    - config_captcha.name = "captcha"
+    - config_captcha.label = " Ingresa los caracteres que ves en la imagen"
+    - config_captcha.image = "{{ new_cptch_image }}"
+    - config_captcha.input_hidden_val = "{{ new_cptch_key }}"
+    - config_captcha.input_hidden = "captcha_0"
+    - config_captcha.input = "captcha_1"
+    +captcha(config_captcha)
+    {% endif %}
+
+    button(type="submit") Loguear
+
+block scripts
+  +requireTag('site.login')

@@ -1,0 +1,73 @@
+- var custom = {};
+
+doctype html
+
+include _mixins
+include _mixins_forms
+
+block html
+  <!--[if lt IE 7]><html id="html" class="no-js lt-ie9 lt-ie8 lt-ie7" lang='es' xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+  <!--[if IE 7]><html id="html" class="no-js ie7 lt-ie9 lt-ie8" lang='es' xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+  <!--[if IE 8]><html id="html" class="no-js ie8 lt-ie9" lang="es" xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+  <!--[if IE 9]><html id="html" class="no-js ie9 lt-ie10" lang="es" xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+  html#html(lang='es')
+    //<![endif]
+    head
+      title #{custom.title} | #{config.settings.project_name}
+      meta( charset='utf-8' )
+      meta( http-equiv='X-UA-Compatible', content='IE=edge,chrome=1' )
+      meta( name="viewport",content="width=device-width,initial-scale=1.0, maximum-scale=1, user-scalable=no")
+      meta( name='description', content!="{{ page_description }}")
+      meta( property="og:type", content!="website")
+      meta( property="og:url", content!="{{ og_url }}")
+      meta( property="og:title", content!="{{ og_title }}")
+      meta( property="og:image", content!="{{ og_image }}")
+      meta( property="og:description", content!="{{ og_description }}")
+      link( rel='icon', type='image/png', href!=config.static_url('images/favicon.ico'))
+      <!--[if gte IE 6 & lt IE 9]><script src="{{ STATIC_URL }}scripts/libs/html5shiv.js"></script><![endif]-->
+      <!--[if gte IE 6 & lt IE 9]><script src="{{ STATIC_URL }}scripts/libs/selectivizr.js"></script><![endif]-->
+      <!--[if lte IE 9]><script> window._ie = true; </script><![endif]-->
+      +livereload()
+      //- block article_tags
+      //-   //- Usar solo en caso de tratarse de artículos de un blog, es decir og:type = article
+      //-   meta( property="article:tag", content="Awesome tag 1")
+      //-   meta( property="article:tag", content="Awesome tag 2")
+      //-   meta( property="article:section", content="Awesome category")
+      //-   meta( property="article:published_time", content="2014-12-21T17:38:02+00:00")
+
+      //- block meta_twitter
+      //-   //- Importante para tener impacto (https://dev.twitter.com/cards/types/summary)
+      //-   //- Éstos metas se usan para PLA en Twitter, galerias, etcétera
+      //-   //- /***** Twitter:card *****/
+      //-   //- Hay que tener en cuenta que Twitter card puede tener varios valores al igual que og:type de Facebook
+      //-   //- En éstos casos es importante revisar la documentación de Twitter, dado de que cada valor 
+      //-   //- podría involucrar la necesidad de más metas, por defecto se usará  summary_large_image
+      //-   //- Para más información, leer la documentación del skel
+      //-   meta( name="twitter:card", content="summary_large_image")
+      //-   meta( name="twitter:site", content="@nodosdigital")
+      //-   meta( name="twitter:title", content="Amazing news")
+      //-   meta( name="twitter:description", content="Skelsus es un skeleton desarrollado en NodosDigital.")
+      //-   //- considerar una imagen grande(1200x637)
+      //-   meta( name="twitter:image", content="https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg")
+      //-   meta( name="twitter:url", content="https://www.flickr.com/photos/unicphoto/sets/72157645001703785/")
+      block styles
+        link(href!=config.static_url('styles/main.css'), rel='stylesheet')
+      +tracking
+    body#body(class=custom.body_cls ? custom.body_cls:'')      
+      block content
+        //- Inicio de header
+        block header
+          include includes/_header
+        //- Fin de header
+        main
+          //- Inicio de contenido
+          block main
+          //- Fin contenido
+
+        //- Inicio Footer
+        block footer
+          include includes/_footer
+        //- Fin footer
+      block addons
+        +social(['fb','tw'])      
+      block scripts

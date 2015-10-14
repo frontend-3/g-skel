@@ -1,0 +1,600 @@
+mixin input_password(config)
+  - name = config.name || ''
+  - var_name = config.var_name || name
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - defaultValue = config.defaultValue || ''
+  - minLength = config.minLength || 0
+  - referenceConfirm = config.referenceConfirm || false
+  - hasNoLabel = config.hasNoLabel || false
+  - placeholder = config.placeholder || ''
+  - label = config.label || ''
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      if (!hasNoLabel)
+        label.ElementForm-label(for="#{id}")=label
+      if (referenceConfirm)
+        input.ElementForm-input(
+          class='is-disabled',
+          name="#{name}",          
+          id="#{id}",
+          autocomplete="off",
+          data-reference-confirm="#{referenceConfirm}",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          data-rule-minlength="#{minLength}",
+          data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          type="password",
+          placeholder="#{placeholder}",
+          value!="")
+
+      else
+        input.ElementForm-input(
+          name="#{name}",
+          id="#{id}",
+          autocomplete="off",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          data-rule-minlength="#{minLength}",
+          data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          type="password",
+          placeholder="#{placeholder}",
+          value!="")
+
+    .ElementForm-errorContent
+      {% if form.#{var_name}.errors %}
+      {% for error in form.#{var_name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+
+mixin input_text(config)
+  - name = config.name || ''
+  - var_name = config.var_name || name
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - defaultValue = config.defaultValue || ''
+  - minLength = config.minLength || 0
+  - isDisabled = config.isDisabled || false
+  - hasNoLabel = config.hasNoLabel || false
+  - placeholder = config.placeholder || ''
+  - label = config.label || ''
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      if (!hasNoLabel)
+        label.ElementForm-label(for="#{id}")=label
+      if (isDisabled)
+        input.ElementForm-input(
+          class='is-disabled',
+          name="#{name}",          
+          id="#{id}",
+          autocomplete="off",
+          disabled="disabled",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          data-rule-minlength="#{minLength}",
+          data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          type="text",
+          placeholder="#{placeholder}",
+          value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
+
+      else
+        input.ElementForm-input(
+          name="#{name}",
+          id="#{id}",
+          autocomplete="off",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          data-rule-minlength="#{minLength}",
+          data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          type="text",
+          placeholder="#{placeholder}",
+          value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
+
+    .ElementForm-errorContent
+      {% if form.#{var_name}.errors %}
+      {% for error in form.#{var_name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+mixin input_date(config)  
+  - name = config.name || ''
+  - var_name = config.var_name || name
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - defaultValue = config.defaultValue || ''
+  - isDisabled = config.isDisabled || false
+  - hasNoLabel = config.hasNoLabel || false
+  - label = config.label || ''
+  - dateFormat = config.dateFormat || 'dd/mm/yyyy'
+  - minDate = config.minDate || '01/01/1920'
+  - maxDate = config.maxDate || false
+
+
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      if (!hasNoLabel)
+        label.ElementForm-label(for="#{id}")=label
+
+      if (isDisabled)
+        input.ElementForm-input.ElementForm-input--date(
+          class='is-disabled',
+          name="#{name}",          
+          id="#{id}",
+          autocomplete="off",
+          disabled="disabled",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          data-rule-minlength="#{minLength}",
+          data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          date="true",
+          data-rule-mindate="#{minDate}",
+          data-rule-maxdate="#{maxDate}",
+          date-format="#{dateFormat}",
+          value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
+
+      else
+        input.ElementForm-input.ElementForm-input--date(
+          name="#{name}",
+          id="#{id}",
+          autocomplete="off",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          data-rule-minlength="#{minLength}",
+          data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          date="true",
+          data-rule-mindate="#{minDate}",
+          data-rule-maxdate="#{maxDate}",
+          date-format="#{dateFormat}",
+          value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
+
+    .ElementForm-errorContent
+      {% if form.#{var_name}.errors %}
+      {% for error in form.#{var_name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+mixin input_number(config)  
+  - name = config.name || ''
+  - var_name = config.var_name || name
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - defaultValue = config.defaultValue || ''
+  - isDisabled = config.isDisabled || false
+  - hasNoLabel = config.hasNoLabel || false
+  - label = config.label || ''
+  - placeholder = config.placeholder || ''
+
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      if (!hasNoLabel)
+        label.ElementForm-label(for="#{id}")=label
+
+      if (isDisabled)
+        input.ElementForm-input.ElementForm-input--number(
+          class='is-disabled',
+          name="#{name}",
+          id="#{id}",
+          autocomplete="off",
+          disabled="disabled",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          data-rule-minlength="#{minLength}",
+          data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          number,
+          placeholder="#{placeholder}",
+          value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
+
+      else
+        input.ElementForm-input.ElementForm-input--number(
+          name="#{name}",
+          id="#{id}",
+          autocomplete="off",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          data-rule-minlength="#{minLength}",
+          data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          number,
+          placeholder="#{placeholder}",
+          value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
+
+    .ElementForm-errorContent
+      {% if form.#{name}.errors %}
+      {% for error in form.#{name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+mixin input_email(config)  
+  - name = config.name || ''
+  - var_name = config.var_name || name
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - defaultValue = config.defaultValue || ''
+  - isDisabled = config.isDisabled || false
+  - hasNoLabel = config.hasNoLabel || false
+  - label = config.label || ''
+  - placeholder = config.placeholder || ''
+
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      
+      if (!hasNoLabel)
+        label.ElementForm-label(for="#{id}")=label
+
+      if (isDisabled)
+        input.ElementForm-input.ElementForm-input--email(
+          class='is-disabled',
+          name="#{name}",          
+          id="#{id}",
+          autocomplete="off",
+          disabled="disabled",
+          type="email",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          data-rule-minlength="#{minLength}",
+          placeholder="#{placeholder}",
+          data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
+
+      else
+        input.ElementForm-input.ElementForm-input--email(
+          name="#{name}",
+          id="#{id}",
+          autocomplete="off",
+          type="email",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          data-rule-minlength="#{minLength}",
+          placeholder="#{placeholder}",
+          data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+          value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
+
+    .ElementForm-errorContent
+      {% if form.#{var_name}.errors %}
+      {% for error in form.#{var_name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+mixin input_search(config)  
+  - name = config.name || ''
+  - name_hidden = config.name_hidden || ''
+  - var_name = config.var_name || name
+  - var_name_hidden = config.var_name_hidden || name_hidden
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - id_hidden = config.iid_hiddend || name_hidden  
+  - hasNoLabel = config.hasNoLabel || false
+  - hasIcon = config.hasIcon || true
+  - label = config.label || ''
+  - placeholder = config.placeholder || ''
+  - datasource = config.datasource || ""
+
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      if (!hasNoLabel)
+        label.ElementForm-label(for="#{id}")=label
+        
+      input.ElementForm-input(
+        class="ci-input",
+        name="#{name}",
+        id="#{id}",
+        autocomplete="off",
+        data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+        data-rule-minlength="#{minLength}",
+        data-rule-maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+        maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
+        type="text",
+        placeholder="#{placeholder}",
+        data-source="#{datasource}")
+      input.ElementForm-inputHidden( 
+        name="#{name_hidden}",
+        id="#{id_hidden}",
+        type="hidden")
+      if(hasIcon)
+        span.ElementForm-ico
+
+
+    .ElementForm-errorContent
+      {% if form.#{var_name}.errors %}
+      {% for error in form.#{var_name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+mixin input_file(config)
+  - name = config.name || ''
+  - var_name = config.var_name || name
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - defaultValue = config.defaultValue || ''
+  - minLength = config.minLength || 0
+  - isDisabled = config.isDisabled || false
+  - hasNoLabel = config.hasNoLabel || false
+  - placeholder = config.placeholder || ''
+  - label = config.label || ''
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      if (!hasNoLabel)
+        label.ElementForm-label(for="#{id}")=label
+      if (isDisabled)
+        input.ElementForm-input(
+          class='is-disabled',
+          name="#{name}",          
+          id="#{id}",
+          autocomplete="off",
+          disabled="disabled",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          type="file",
+          placeholder="#{placeholder}",
+          value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
+
+      else
+        span Adjunta un archivo
+        input.ElementForm-input(
+          name="#{name}",
+          id="#{id}",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          type="file",
+          placeholder="#{placeholder}",
+          value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
+
+    .ElementForm-errorContent
+      {% if form.#{var_name}.errors %}
+      {% for error in form.#{var_name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+mixin list_checkbox(config)  
+  - name = config.name || ''
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - var_name = config.var_name || name
+  - hasNoLabel = config.hasNoLabel || false
+  - label = config.label || ''
+
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      label.ElementForm-label=label
+      .ElementForm-checkBoxOptions
+        {% for option in form.#{var_name}.field.choices %}
+        .ElementForm-checkBoxContent
+          input.ElementForm-checkbox(
+            name="#{name}",
+            id="#{id}-{{option.0}}",
+            type="checkbox",
+            value="{{option.0}}",
+            data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}")
+          label.ElementForm-label.ElementForm-label--checkbox(for="#{name}-{{option.0}}"){{option.1}}
+        {% endfor %} 
+
+    .ElementForm-errorContent
+      {% if form.#{name}.errors %}
+      {% for error in form.#{name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+mixin captcha(config)
+  - name = config.name || ''
+  - input_hidden_val = config.input_hidden_val || ''
+  - input_hidden = config.input_hidden || ''
+  - input = config.input || ''
+  - image = config.image || ''
+  - var_name = config.var_name || name
+  - id = config.id || name
+  - hasNoLabel = config.hasNoLabel || false
+  - label = config.label || ''
+  .ElementForm.ElementForm--captcha(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      if (!hasNoLabel)
+        label.ElementForm-label(for="#{id}")=label
+      .ElementForm-captchaWrapper
+        .ElementForm-captchaContent
+          .ElementForm-captchaImgContent
+            img(src!='#{image}')
+          .ElementForm-captchaRefreshContent
+            span.refresh
+        .ElementForm-captchaInput
+          input(name="#{input_hidden}",
+                type="hidden",
+                value!="#{input_hidden_val}")  
+          input(name="#{input}",
+                id="#{input}",
+                type="text")
+
+    .ElementForm-errorContent
+      {% if form.#{var_name}.errors %}
+      {% for error in form.#{var_name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+
+mixin checkbox(config)  
+  - name = config.name || ''
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - var_name = config.var_name || name
+  - label = config.label || ''
+  - defaultValue = config.defaultValue || ""
+  - isRequired = config.isRequired || false
+  - link_href = config.link_href || ""
+  - link_text = config.link_text || ""
+  - has_link = config.has_link || false
+
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      .ElementForm-contentCheckBox
+        .ElementForm-checkBoxIcon
+        input.ElementForm-checkbox(
+          name="#{name}", 
+          id="#{id}",
+          type="checkbox",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}"
+        )      
+      label.ElementForm-label.ElementForm-label--checkbox(for="#{id}")=label
+      if has_link
+        a(href="#{link_href}") #{link_text}
+    .ElementForm-errorContent
+      {% if form.#{name}.errors %}
+      {% for error in form.#{name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+mixin list_radiobox(config)  
+  - name = config.name || ''
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - var_name = config.var_name || name
+  - hasNoLabel = config.hasNoLabel || false
+  - label = config.label || ''
+
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      label.ElementForm-label--radioBox=label
+      .ElementForm-radioBoxOptions
+        {% for option in form.#{var_name}.field.choices %}
+        .ElementForm-radioBoxContent          
+          input.ElementForm-radiobox(
+            name="#{name}",
+            id="#{id}-{{option.0}}",
+            type="radio",
+            value="{{option.0}}",
+            data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}"
+          )
+          label.ElementForm-label.ElementForm-label--radiobox(for="#{name}-{{option.0}}"){{option.1}}
+        {% endfor %} 
+
+    .ElementForm-errorContent
+      {% if form.#{name}.errors %}
+      {% for error in form.#{name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+mixin radiobox(config)  
+  - name = config.name || ''
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - var_name = config.var_name || name
+  - label = config.label || ''
+  - defaultValue = config.defaultValue || ''
+
+  .ElementForm(class='ElementForm--' + camelCase(name))
+    .ElementForm-statement
+      .ElementForm-contentRadioBox
+        .ElementForm-radioBoxIcon
+        input.ElementForm-input--radioBox(
+          name="#{name}",
+          id="#{id}",
+          type="radio",
+          data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+          value="#{defaultValue}"
+        )      
+      label.ElementForm-label--radiobox(for="#{id}")=label
+    .ElementForm-errorContent
+      {% if form.#{var_name}.errors %}
+      {% for error in form.#{var_name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+mixin select(config)  
+  - name = config.name || ''
+  - id = config.id || name
+  - minLength = config.minLength || 0
+  - var_name = config.var_name || name
+  - required = config.required || ''
+  - valueSelected = config.valueSelected || ''
+  - isDisabled = config.isDisabled || false
+  - dataSource = config.dataSource || ''
+  - isAjax = config.isAjax || false
+  - hasNoLabel = config.hasNoLabel || false
+  - label = config.label || ''
+  - defaultText = config.defaultText || ''
+  .ElementForm(class='ElementForm--' + camelCase(name))    
+    .ElementForm-statement
+      if (!hasNoLabel)
+        label.ElementForm-label.ElementForm-label--select(for="#{id}")=label      
+      .ElementForm-select
+        .ElementForm-selectText=defaultText
+        .ElementForm-selectIcon
+        if (isDisabled)
+          select.ElementForm-select-inner(
+            class="is-disabled",
+            disabled="disabled",
+            name="#{name}",
+            id="#{id}",
+            data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",            
+            data-source="#{config.dataSource}" ? "#{config.dataSource}" : '',
+            data-value="{{form.#{name}.value}}"
+          ) 
+            
+            if !isAjax
+              {% for item in #{var_name} %}
+              option.ElementForm-selectOption(value!="{{ item.code }}") {{ item.name }}
+              {% endfor %}
+
+        else
+          select.ElementForm-select-inner(
+            name="#{name}",
+            id="#{id}",
+            data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}",
+            data-source="#{config.dataSource}" ? "#{config.dataSource}" : '',
+            data-value="{{form.#{name}.value}}"
+          )          
+            if !isAjax              
+              {% for item in #{var_name} %}   
+              {% if item.code == form.#{name}.value %}
+              option.ElementForm-selectOption(value!="{{ item.code }}", selected) {{ item.name }}                              
+              {% else %}
+              option.ElementForm-selectOption(value!="{{ item.code }}") {{ item.name }}
+              {% endif %}
+              {% endfor %}
+
+    .ElementForm-errorContent
+      {% if form.#{var_name}.errors %}
+      {% for error in form.#{var_name}.errors %}
+      label(class="ElementForm-label--error", for="#{id}") {{ error }}
+      {% endfor %}
+      {% else %}
+      //- label(class="ElementForm-label--error", for="#{id}")
+      {% endif %}
+
+
+- function camelCase(input) { 
+    - return input.toLowerCase().replace(/_(.)/g, function(match, group1) {
+      - return group1.toUpperCase();
+    - });
+- }

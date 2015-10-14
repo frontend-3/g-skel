@@ -1,0 +1,88 @@
+mixin livereload()
+  {% if livereload %}
+  script(src="//localhost:35729/livereload.js")
+  {% endif %}
+
+mixin requireTag(url)
+  - url = url || ''
+  - if(config.getEnv() === 'dev')
+      script(type='text/javascript', src!=config.static_url('scripts/libs/require.js'))
+      script(type='text/javascript', src!=config.static_url('scripts/libs/require-config.js'))
+      script(type='text/javascript').
+        window.static_url = '!{config.static_url('')}';
+        require.config({
+          baseUrl:'!{config.static_url('')}' + 'scripts'
+        })
+        require(['!{url}']);
+      
+  - else
+    script(type='text/javascript', src!=config.static_url('scripts/libs/require.js'))
+    script(type='text/javascript')
+      include ../static/scripts/libs/require-config.js
+    script(type='text/javascript').
+      window.static_url = '!{config.static_url('')}';
+      require.config({
+        baseUrl:'!{config.static_url('')}' + 'scripts'
+      })
+      require(['!{url}']);
+      
+
+mixin tracking
+  script(type="text/javascript").
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', '!{config.analytics_ua}', 'auto');
+    ga('send', 'pageview');
+
+mixin social(array)
+  - var social_js = [];
+  each item in array
+    if(item==='fb')
+      - social_js.push("{'url':'connect.facebook.net/en_US/sdk.js','type':'fb'}");
+      #fb-root
+    if(item=='tw')
+      - social_js.push("{'url':'platform.twitter.com/widgets.js','type':'tw'}");
+    if(item=='gp')
+      - social_js.push("{'url':'apis.google.com/js/plusone.js','type':'gp'}");
+
+  script.
+    (function(d, u) {
+      var s = d.scripts[0],
+        i = u.length, g;
+      while (i--) {
+        if(u[i]) {
+          if(u[i]['type'] === 'fb') {
+            window.fbAsyncInit = function() {
+              FB.init({
+                appId      : '{{ FB_ID }}',
+                xfbml      : true,
+                version    : 'v2.0'
+              });
+            };
+          }
+          g = d.createElement('script');
+          g.async = true;
+          g.type = 'text/javascript';
+          g.src = '//' + u[i]['url'];
+          s.parentNode.insertBefore(g, s);
+        }
+      }
+    }(document, [!{social_js}]));
+
+
+
+mixin breadcrumb(config)
+  .Breadcrumb
+    - for ( var i = 0 ; i < config.text.length ; i++)
+      div(itemscope itemtype="http://data-vocabulary.org/Breadcrumb").Breadcrumb-item
+        - if (i!=0)
+           / 
+        - if (i == (config.text.length -1))
+          a(href!="#{config.link[i]}", itemprop="url").is-current 
+            span !{config.text[i]}
+        - else
+          a(href!="#{config.link[i]}", itemprop="url")
+            span !{config.text[i]}

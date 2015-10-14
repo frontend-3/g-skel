@@ -1,0 +1,12 @@
+extend ../_layout
+
+prepend html
+  - custom.title = 'Home'
+  - custom.body_cls = 'body--home'
+
+block main
+  section.home
+    h2 Home
+
+block scripts
+  +requireTag('site.home')

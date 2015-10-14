@@ -1,0 +1,117 @@
+<!DOCTYPE html><!--[if lt IE 7]><html id="html" class="no-js lt-ie9 lt-ie8 lt-ie7" lang='es' xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+<!--[if IE 7]><html id="html" class="no-js ie7 lt-ie9 lt-ie8" lang='es' xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+<!--[if IE 8]><html id="html" class="no-js ie8 lt-ie9" lang="es" xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+<!--[if IE 9]><html id="html" class="no-js ie9 lt-ie10" lang="es" xmlns:fb="http://ogp.me/ns/fb#"><![endif]--><html id="html" lang="es"><!--<![endif]--><head><title>Registro | </title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1, user-scalable=no"><meta name="description" content="{{ page_description }}"><meta property="og:type" content="website"><meta property="og:url" content="{{ og_url }}"><meta property="og:title" content="{{ og_title }}"><meta property="og:image" content="{{ og_image }}"><meta property="og:description" content="{{ og_description }}"><link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.ico"><!--[if gte IE 6 & lt IE 9]><script src="{{ STATIC_URL }}scripts/libs/html5shiv.js"></script><![endif]-->
+<!--[if gte IE 6 & lt IE 9]><script src="{{ STATIC_URL }}scripts/libs/selectivizr.js"></script><![endif]-->
+<!--[if lte IE 9]><script> window._ie = true; </script><![endif]-->{% if livereload %}<script src="//localhost:35729/livereload.js"></script>{% endif %}<link href="{{ STATIC_URL }}styles/main.css" rel="stylesheet"><script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+</script></head><body id="body" class="body--register">     <header><nav><ul><li><a href="#">Menu 1</a><a href="#">Menu 2</a><a href="#">Menu 3</a></li></ul></nav></header><main><div class="Register"><h2 class="Register-title">Registro</h2><form method="post" action="{% url 'complete_register' %}" data-tracking-category="" data-tracking-action="" data-tracking-label="" data-custom-form="false" class="Register-form">{% csrf_token %}<div class="ElementForm ElementForm--firstName"><div class="ElementForm-statement"><label for="first_name" class="ElementForm-label">Nombres</label><input name="first_name" id="first_name" autocomplete="off" data-rule-required="{% if form.first_name.field.required %}true{% else %}false{% endif %}" data-rule-minlength="0" data-rule-maxlength="{% if form.first_name.field.max_length %}{{form.first_name.field.max_length}}{% endif %}" maxlength="{% if form.first_name.field.max_length %}{{form.first_name.field.max_length}}{% endif %}" type="text" placeholder="" value="{% if form.first_name.value %}{{form.first_name.value}}{% else %}{% endif %}" class="ElementForm-input"></div><div class="ElementForm-errorContent">{% if form.first_name.errors %}
+{% for error in form.first_name.errors %}<label for="first_name" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div><div class="ElementForm ElementForm--lastName"><div class="ElementForm-statement"><label for="last_name" class="ElementForm-label">Apellidos</label><input name="last_name" id="last_name" autocomplete="off" data-rule-required="{% if form.last_name.field.required %}true{% else %}false{% endif %}" data-rule-minlength="0" data-rule-maxlength="{% if form.last_name.field.max_length %}{{form.last_name.field.max_length}}{% endif %}" maxlength="{% if form.last_name.field.max_length %}{{form.last_name.field.max_length}}{% endif %}" type="text" placeholder="" value="{% if form.last_name.value %}{{form.last_name.value}}{% else %}{% endif %}" class="ElementForm-input"></div><div class="ElementForm-errorContent">{% if form.last_name.errors %}
+{% for error in form.last_name.errors %}<label for="last_name" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div>
+<div class="ElementForm ElementForm--documentNumber"><div class="ElementForm-statement"><label for="document_number" class="ElementForm-label">Dni</label><input name="document_number" id="document_number" autocomplete="off" data-rule-required="{% if form.document_number.field.required %}true{% else %}false{% endif %}" data-rule-minlength="8" data-rule-maxlength="{% if form.document_number.field.max_length %}{{form.document_number.field.max_length}}{% endif %}" maxlength="{% if form.document_number.field.max_length %}{{form.document_number.field.max_length}}{% endif %}" number placeholder="" value="{% if form.document_number.value %}{{form.document_number.value}}{% else %}{% endif %}" class="ElementForm-input ElementForm-input--number"></div><div class="ElementForm-errorContent">{% if form.document_number.errors %}
+{% for error in form.document_number.errors %}<label for="document_number" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div><div class="ElementForm ElementForm--email"><div class="ElementForm-statement"><label for="email" class="ElementForm-label">Correo Electrónico</label><input name="email" id="email" autocomplete="off" type="email" data-rule-required="{% if form.email.field.required %}true{% else %}false{% endif %}" data-rule-minlength="0" placeholder="" data-rule-maxlength="{% if form.email.field.max_length %}{{form.email.field.max_length}}{% endif %}" maxlength="{% if form.email.field.max_length %}{{form.email.field.max_length}}{% endif %}" value="{% if form.email.value %}{{form.email.value}}{% else %}{% endif %}" class="ElementForm-input ElementForm-input--email"></div><div class="ElementForm-errorContent">{% if form.email.errors %}
+{% for error in form.email.errors %}<label for="email" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div><div class="ElementForm ElementForm--phone"><div class="ElementForm-statement"><label for="phone" class="ElementForm-label">Teléfono</label><input name="phone" id="phone" autocomplete="off" data-rule-required="{% if form.phone.field.required %}true{% else %}false{% endif %}" data-rule-minlength="0" data-rule-maxlength="{% if form.phone.field.max_length %}{{form.phone.field.max_length}}{% endif %}" maxlength="{% if form.phone.field.max_length %}{{form.phone.field.max_length}}{% endif %}" number placeholder="" value="{% if form.phone.value %}{{form.phone.value}}{% else %}{% endif %}" class="ElementForm-input ElementForm-input--number"></div><div class="ElementForm-errorContent">{% if form.phone.errors %}
+{% for error in form.phone.errors %}<label for="phone" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div><div class="ElementForm ElementForm--codDpto">   <div class="ElementForm-statement"><label for="cod_dpto" class="ElementForm-label ElementForm-label--select">Departamento</label><div class="ElementForm-select"><div class="ElementForm-selectText"></div><div class="ElementForm-selectIcon"></div><select name="cod_dpto" id="cod_dpto" data-rule-required="{% if form.departments.field.required %}true{% else %}false{% endif %}" data-source="undefined" data-value="{{form.cod_dpto.value}}" class="ElementForm-select-inner">         {% for item in departments %}   
+{% if item.code == form.cod_dpto.value %}<option value="{{ item.code }}" selected class="ElementForm-selectOption">{{ item.name }}                              </option>{% else %}<option value="{{ item.code }}" class="ElementForm-selectOption">{{ item.name }}</option>{% endif %}
+{% endfor %}</select></div></div><div class="ElementForm-errorContent">{% if form.departments.errors %}
+{% for error in form.departments.errors %}<label for="cod_dpto" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div><div class="ElementForm ElementForm--codProv">   <div class="ElementForm-statement"><label for="cod_prov" class="ElementForm-label ElementForm-label--select">Provincia</label><div class="ElementForm-select"><div class="ElementForm-selectText"></div><div class="ElementForm-selectIcon"></div><select name="cod_prov" id="cod_prov" data-rule-required="{% if form.cod_prov.field.required %}true{% else %}false{% endif %}" data-source="{% url 'provinces' %}" data-value="{{form.cod_prov.value}}" class="ElementForm-select-inner">         </select></div></div><div class="ElementForm-errorContent">{% if form.cod_prov.errors %}
+{% for error in form.cod_prov.errors %}<label for="cod_prov" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div><div class="ElementForm ElementForm--codDist">   <div class="ElementForm-statement"><label for="cod_dist" class="ElementForm-label ElementForm-label--select">Distrito</label><div class="ElementForm-select"><div class="ElementForm-selectText"></div><div class="ElementForm-selectIcon"></div><select name="cod_dist" id="cod_dist" data-rule-required="{% if form.cod_dist.field.required %}true{% else %}false{% endif %}" data-source="{% url 'districts' %}" data-value="{{form.cod_dist.value}}" class="ElementForm-select-inner">         </select></div></div><div class="ElementForm-errorContent">{% if form.cod_dist.errors %}
+{% for error in form.cod_dist.errors %}<label for="cod_dist" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div><div class="ElementForm ElementForm--address"><div class="ElementForm-statement"><label for="address" class="ElementForm-label">Dirección</label><input name="address" id="address" autocomplete="off" data-rule-required="{% if form.address.field.required %}true{% else %}false{% endif %}" data-rule-minlength="0" data-rule-maxlength="{% if form.address.field.max_length %}{{form.address.field.max_length}}{% endif %}" maxlength="{% if form.address.field.max_length %}{{form.address.field.max_length}}{% endif %}" type="text" placeholder="" value="{% if form.address.value %}{{form.address.value}}{% else %}{% endif %}" class="ElementForm-input"></div><div class="ElementForm-errorContent">{% if form.address.errors %}
+{% for error in form.address.errors %}<label for="address" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div><div class="ElementForm ElementForm--password"><div class="ElementForm-statement"><label for="password" class="ElementForm-label">Contraseña</label><input name="password" id="password" autocomplete="off" data-reference-confirm="#confirm_password" data-rule-required="{% if form.password.field.required %}true{% else %}false{% endif %}" data-rule-minlength="2" data-rule-maxlength="{% if form.password.field.max_length %}{{form.password.field.max_length}}{% endif %}" maxlength="{% if form.password.field.max_length %}{{form.password.field.max_length}}{% endif %}" type="password" placeholder="" value="" class="ElementForm-input is-disabled"></div><div class="ElementForm-errorContent">{% if form.password.errors %}
+{% for error in form.password.errors %}<label for="password" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div><div class="ElementForm ElementForm--confirmPassword"><div class="ElementForm-statement"><label for="confirm_password" class="ElementForm-label">Confirmar contraseña</label><input name="confirm_password" id="confirm_password" autocomplete="off" data-rule-required="{% if form.confirm_password.field.required %}true{% else %}false{% endif %}" data-rule-minlength="2" data-rule-maxlength="{% if form.confirm_password.field.max_length %}{{form.confirm_password.field.max_length}}{% endif %}" maxlength="{% if form.confirm_password.field.max_length %}{{form.confirm_password.field.max_length}}{% endif %}" type="password" placeholder="" value="" class="ElementForm-input"></div><div class="ElementForm-errorContent">{% if form.confirm_password.errors %}
+{% for error in form.confirm_password.errors %}<label for="confirm_password" class="ElementForm-label--error">{{ error }}</label>{% endfor %}
+{% else %}{% endif %}</div></div><button type="submit" id="ButtonSend">Registar</button></form></div></main><footer>Este es un footer</footer><div id="fb-root"></div><script>(function(d, u) {
+  var s = d.scripts[0],
+    i = u.length, g;
+  while (i--) {
+    if(u[i]) {
+      if(u[i]['type'] === 'fb') {
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '{{ FB_ID }}',
+            xfbml      : true,
+            version    : 'v2.0'
+          });
+        };
+      }
+      g = d.createElement('script');
+      g.async = true;
+      g.type = 'text/javascript';
+      g.src = '//' + u[i]['url'];
+      s.parentNode.insertBefore(g, s);
+    }
+  }
+}(document, [{'url':'connect.facebook.net/en_US/sdk.js','type':'fb'},{'url':'platform.twitter.com/widgets.js','type':'tw'}]));
+
+
+</script><script type="text/javascript" src="{{ STATIC_URL }}scripts/libs/require.js"></script><script type="text/javascript">require.config({
+  baseUrl:'/static/scripts',
+  paths: {
+    'fb': 'modules/fb',
+    'tw': 'modules/tw',
+    'async': 'libs/require.async',
+    'autotab' : 'libs/jquery.autotab',
+    'alphanumeric': 'libs/jquery.alphanumeric',
+    'registerForm': 'modules/register-form',
+    'easyModal': 'modules/easy-modal',
+    'easySlider': 'modules/easy-slider',
+    'easyForm': 'modules/easy-form',
+    'easySearch': 'modules/easy-search',
+    'floatedLabel': 'libs/floated.label',    
+    'validate': 'libs/jquery.validate/jquery.validate',
+    'jquery': 'libs/jquery-1.11.0',
+    'validateExt':'libs/jquery.validate/additional-methods',
+    'datepicker':'libs/jquery-ui-1.10.4.datepicker',
+    'jqueryUI': 'libs/jquery-ui-1.9.2.custom'
+  },
+  shim: {
+    'alphanumeric':[
+      'jquery'
+    ],
+    'validate' : [
+      'jquery'
+    ],
+    'validateExt':[
+      'validate'
+    ],
+    'floatedLabel' : [
+      'jquery'
+    ],
+    'autotab' : [
+      'jquery'
+    ],
+    'jqueryUI':[
+      'jquery'
+    ],
+    'easySearch' : [
+      'jqueryUI'
+    ],
+    'easyModal': [
+      'jquery'
+    ],
+    'easyForm': [
+      'jquery'
+    ]
+  }
+});</script><script type="text/javascript">window.static_url = '{{ STATIC_URL }}';
+require.config({
+  baseUrl:'{{ STATIC_URL }}' + 'scripts'
+})
+require(['site.user.register']);
+
+</script></body></html>

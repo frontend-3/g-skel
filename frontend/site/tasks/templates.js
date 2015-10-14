@@ -1,24 +1,44 @@
-function(gulp, config) {
-  var options = config.options,
-      files   = config.files,
-      _files  = {},
-      plugins = {
-        jade : require('gulp-jade')
-        rename : require('gulp-rename')
-      };
+module.exports = function(gulp) {
+    var plugins,
+        argv;
 
-  for (_files in files) {
-    var task_name = "templates:" + _files,
-        config_file = files[_files];
+    argv = require('yargs').argv;
 
-    gulp.task(task_name, function () {
+    plugins = {
+      jade    : require('gulp-jade'),
+      rename  : require('gulp-rename'),
+      notify  : require('gulp-notify')
+    };
 
-        result = gulp.src(config_file.src, config_file.options)
-            .pipe(plugins.jade(config_file.options))
-            .pipe(plugins.rename(config_file.ext))
-            .pipe(gulp.dest(config_file.dest))
+    gulp.task('templates', function() {
 
-        return result;
+        pretty = argv.format ? true : false;
+
+        return gulp.src([
+            '*.jade',
+            '**/*.jade',
+            '!_layout.jade',
+            '!**/_layout.jade',
+            '!includes/**/*.jade',
+            '!mixins/**/*.jade',
+            '!_*.jade'
+            ], {
+                cwd : 'templates/sections'
+            })
+            .pipe(plugins.jade({
+                pretty: pretty,
+                data: {
+                    config: gulp.config
+                }
+            })
+            .on("error",plugins.notify.onError(function (error) {
+                return "Message to the notifier: " + error.message;
+            })))
+            .pipe(plugins.rename(function (path){
+                path.extname = gulp.config.settings.template_ext
+            }))
+            .pipe(gulp.dest(gulp.config.deploy_routes().templates))
+            .pipe(plugins.notify('Compiled templates'));
     });
-  };
+
 }
