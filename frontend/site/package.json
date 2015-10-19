@@ -8,20 +8,18 @@
   "author": "developer no2",
   "license": "BSD",
   "dependencies": {
-    "glob": "^5.0.15",
     "gulp": "^3.9.0",
     "gulp-coffee": "^2.3.1",
     "gulp-htmlmin": "^1.2.0",
     "gulp-install": "^0.6.0",
     "gulp-jade": "^1.0.1",
-    "gulp-load": "^0.1.1",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-requirejs": "^0.1.3",
-    "gulp-requirejs-bundle": "^0.2.2",
+    "gulp-simple-load-tasks": "^1.0.1",
     "gulp-stylus": "^2.1.0",
     "nib": "^1.1.0",
     "requirejs": "^2.1.20",
+    "run-sequence": "^1.1.4",
     "yargs": "^3.27.0"
   }
 }
