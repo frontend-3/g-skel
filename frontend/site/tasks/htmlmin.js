@@ -8,8 +8,6 @@ module.exports = function(gulp) {
       notify  : require('gulp-notify')
     };
 
-    console.log(src)
-
     gulp.task('htmlmin', function() {
 
         return gulp.src([
