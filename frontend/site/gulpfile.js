@@ -6,7 +6,8 @@ var settings,
 argv = require('yargs').argv;
 gulp = require('gulp');
 config = require('./config.js');
-require('./gulp-load-tasks')(gulp)
+
+require('gulp-simple-load-tasks')(gulp)
 config.setEnv('prod');
 settings = require('./settings/prod');
 
@@ -17,4 +18,4 @@ if (argv.dev) {
 
 config.settings = settings;
 gulp.config = config;
-gulp.loadTasks('./tasks');
+gulp.loadTasks(__dirname + '/tasks');
