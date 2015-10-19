@@ -10,6 +10,7 @@
   "dependencies": {
     "glob": "^5.0.15",
     "gulp": "^3.9.0",
+    "gulp-htmlmin": "^1.2.0",
     "gulp-install": "^0.6.0",
     "gulp-jade": "^1.0.1",
     "gulp-load": "^0.1.1",
