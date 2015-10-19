@@ -1,17 +1,17 @@
 require([
-  'jquery',
-  'easyModal'
-], ( $, EasyModal) ->
+  'easyForm',
+], ( $, EasyForm) ->
 
     defaults = {}
     st = {}
     dom = {}
 
-    catchDom = ->
+    catchDom = () ->
         dom.document = $(document)
         return
 
-    afterCatchDom = ->
+    afterCatchDom = () ->
+        EasyForm.setup()
         return
 
     suscribeEvents = ->

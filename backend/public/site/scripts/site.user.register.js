@@ -1,4 +1,4 @@
-require(['jquery', 'easyModal'], function($, EasyModal) {
+require(['easyForm', 'registerForm'], function($, EasyForm, RegisterForm) {
   var afterCatchDom, catchDom, defaults, dom, fn, initalize, st, suscribeEvents;
   defaults = {};
   st = {};
@@ -6,7 +6,10 @@ require(['jquery', 'easyModal'], function($, EasyModal) {
   catchDom = function() {
     dom.document = $(document);
   };
-  afterCatchDom = function() {};
+  afterCatchDom = function() {
+    EasyForm.setup();
+    RegisterForm.setupRegisterForm();
+  };
   suscribeEvents = function() {};
   fn = {};
   initalize = function() {

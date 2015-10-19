@@ -25,7 +25,6 @@ require([
         opts = {}
         st = $.extend({}, defaults, opts)
         catchDom(st)
-        afterCatchDom()
         suscribeEvents()
         return
 

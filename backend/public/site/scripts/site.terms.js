@@ -14,7 +14,6 @@ require(['jquery', 'easyModal'], function($, EasyModal) {
     opts = {};
     st = $.extend({}, defaults, opts);
     catchDom(st);
-    afterCatchDom();
     suscribeEvents();
   };
   dom.document.ready(initialize);

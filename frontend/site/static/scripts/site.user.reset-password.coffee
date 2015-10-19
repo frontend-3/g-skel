@@ -7,11 +7,11 @@ require([
     st = {}
     dom = {}
 
-    catchDom = ->
+    catchDom = () ->
         dom.document = $(document)
         return
 
-    afterCatchDom = ->
+    afterCatchDom = () ->
         return
 
     suscribeEvents = ->
