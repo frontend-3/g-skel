@@ -1,0 +1,1 @@
+define([],function(){function e(e,t,n){_gaq.push(["_trackEvent",e,t,n])}return{sendEvent:e}});
