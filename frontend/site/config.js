@@ -16,7 +16,7 @@ var config = {
         videos: static_path + 'videos/',
         scripts: static_path + '/scripts',
         sprites: static_path + '/sprites'
-      }      
+      }
     } else {
       base = this.settings.root_deploy;
       static_path =  base + 'public/site/';
@@ -45,6 +45,20 @@ var config = {
   },
   getEnv: function () {
     return this.env;
+  },
+  notifyConfig : function (options) {
+      var _config = {}
+
+      if (typeof options == "object") {
+        return options
+      }
+
+      _config = {
+        message : options,
+        onLast  : true
+      }
+
+      return _config;
   }
 };
 
