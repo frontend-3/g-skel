@@ -3,6 +3,7 @@ module.exports = function(gulp) {
 
     plugins = {
       stylus  : require('gulp-stylus'),
+      cssmin  : require('gulp-cssmin'),
       notify  : require('gulp-notify'),
       nib     : require('nib')
     };
@@ -19,10 +20,14 @@ module.exports = function(gulp) {
                 compress: true
             })
             .on("error",plugins.notify.onError(function (error) {
-                return "Message to the notifier: " + error.message;
+                return "Error Stylus " + error.message;
+            })))
+            .pipe(plugins.cssmin()
+            .on("error",plugins.notify.onError(function (error) {
+                return "Error Stylus " + error.message;
             })))
             .pipe(gulp.dest(gulp.config.deploy_routes().styles))
-            .pipe(plugins.notify('Compiled styles'));
+            .pipe(plugins.notify(gulp.config.notifyConfig('Stylus compiled')));
     });
 
 }

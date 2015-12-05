@@ -6,8 +6,9 @@ module.exports = function(gulp) {
 
     plugins = {
       jade    : require('gulp-jade'),
+      htmlmin : require('gulp-htmlmin'),
       rename  : require('gulp-rename'),
-      notify  : require('gulp-notify')
+      notify  : require('gulp-notify'),
     };
 
     gulp.task('templates', function() {
@@ -32,13 +33,24 @@ module.exports = function(gulp) {
                 }
             })
             .on("error",plugins.notify.onError(function (error) {
-                return "Message to the notifier: " + error.message;
+                return "Error Jade " + error.message;
             })))
             .pipe(plugins.rename(function (path){
                 path.extname = gulp.config.settings.template_ext
             }))
+            .on("error",plugins.notify.onError(function (error) {
+                return "Error change extension: " + error.message;
+            }))
+            .pipe(plugins.htmlmin({
+                removeComments    : true,
+                collapseWhitespace: true,
+                minifyJS          : true
+            })
+            .on("error",plugins.notify.onError(function (error) {
+                return "Erro htmlmin: " + error.message;
+            })))
             .pipe(gulp.dest(gulp.config.deploy_routes().templates))
-            .pipe(plugins.notify('Compiled templates'));
+            .pipe(plugins.notify(gulp.config.notifyConfig('Jade compiled')));
     });
 
 }

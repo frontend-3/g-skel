@@ -21,7 +21,7 @@ module.exports = function(gulp) {
                 return "Message to the notifier: " + error.message;
             })))
             .pipe(gulp.dest('build/static/scripts'))
-            .pipe(plugins.notify('Compiled scripts'));
+            .pipe(plugins.notify(gulp.config.notifyConfig('Coffee compiled')));
     });
 
     gulp.task('copy:js', function () {
