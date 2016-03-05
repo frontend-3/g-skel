@@ -15,7 +15,8 @@ var config = {
         fonts: static_path + '/fonts',
         videos: static_path + 'videos/',
         scripts: static_path + '/scripts',
-        sprites: static_path + '/sprites'
+        sprites: static_path + '/sprites',
+        svg: static_path + '/svg'
       }
     } else {
       base = this.settings.root_deploy;
@@ -29,7 +30,8 @@ var config = {
         fonts: static_path + 'fonts/',
         videos: static_path + 'videos/',
         scripts: static_path + 'scripts/',
-        sprites: static_path + 'sprites/'
+        sprites: static_path + 'sprites/',
+        svg: static_path + '/svg'
       }
     }
     return routes;
