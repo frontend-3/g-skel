@@ -8,13 +8,9 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 tab_width = 2
 
-[*.jade]
+[{*.jade, *.styl, *.coffee, *.js, *.config}]
 indent_style = space
 indent_size = 2
-
-[{*.styl, *.coffee, *.js, *.config}]
-indent_style = space
-tab_width = 2
 
 [*.md]
 trim_trailing_whitespace = false
