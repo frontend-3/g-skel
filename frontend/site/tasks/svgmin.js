@@ -7,7 +7,7 @@ module.exports = function(gulp) {
     notify  : require('gulp-notify'),
   };
 
-  gulp.task('svg', function() {
+  gulp.task('svg:min', function() {
     return gulp.src([
       '**/*.svg',
         ], {
