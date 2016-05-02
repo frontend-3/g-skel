@@ -1,7 +1,7 @@
 mixin livereload()
-  {% if livereload %}
+  | {% if livereload %}
   script(src="//localhost:35729/livereload.js")
-  {% endif %}
+  | {% endif %}
 
 mixin requireTag(url)
   - url = url || ''
@@ -79,7 +79,7 @@ mixin breadcrumb(config)
     - for ( var i = 0 ; i < config.text.length ; i++)
       div(itemscope itemtype="http://data-vocabulary.org/Breadcrumb").Breadcrumb-item
         - if (i!=0)
-           / 
+          | / 
         - if (i == (config.text.length -1))
           a(href!="#{config.link[i]}", itemprop="url").is-current 
             span !{config.text[i]}

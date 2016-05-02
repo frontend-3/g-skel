@@ -14,7 +14,7 @@ block main
       data-tracking-action = "",
       data-tracking-label = "",
       data-custom-form = "false")
-      {% csrf_token %}
+      | {% csrf_token %}
 
       - config_first_name = {};
       - config_first_name.name = "first_name"

@@ -9,7 +9,7 @@ block main
     data-tracking-label = "",
     data-custom-form = "false"
   )
-    {% csrf_token %}
+    | {% csrf_token %}
     - config_email = {};
     - config_email.name = "email"
     - config_email.label = "Correo Electrónico"
@@ -22,7 +22,7 @@ block main
     - config_password.minLength = 2
     +input_password(config_password)
 
-    {% if show_captcha %}
+    | {% if show_captcha %}
     - config_captcha = {};
     - config_captcha.name = "captcha"
     - config_captcha.label = " Ingresa los caracteres que ves en la imagen"
@@ -31,7 +31,7 @@ block main
     - config_captcha.input_hidden = "captcha_0"
     - config_captcha.input = "captcha_1"
     +captcha(config_captcha)
-    {% endif %}
+    | {% endif %}
 
     button(type="submit") Loguear
 

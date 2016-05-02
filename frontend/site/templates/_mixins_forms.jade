@@ -41,14 +41,7 @@ mixin input_password(config)
           placeholder="#{placeholder}",
           value!="")
 
-    .ElementForm-errorContent
-      {% if form.#{var_name}.errors %}
-      {% for error in form.#{var_name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 
 mixin input_text(config)
@@ -94,14 +87,7 @@ mixin input_text(config)
           placeholder="#{placeholder}",
           value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
 
-    .ElementForm-errorContent
-      {% if form.#{var_name}.errors %}
-      {% for error in form.#{var_name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 mixin input_date(config)  
   - name = config.name || ''
@@ -154,14 +140,7 @@ mixin input_date(config)
           date-format="#{dateFormat}",
           value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
 
-    .ElementForm-errorContent
-      {% if form.#{var_name}.errors %}
-      {% for error in form.#{var_name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 mixin input_number(config)  
   - name = config.name || ''
@@ -207,14 +186,7 @@ mixin input_number(config)
           placeholder="#{placeholder}",
           value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
 
-    .ElementForm-errorContent
-      {% if form.#{name}.errors %}
-      {% for error in form.#{name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+      +error(config)
 
 mixin input_email(config)  
   - name = config.name || ''
@@ -261,14 +233,7 @@ mixin input_email(config)
           maxlength="{% if form.#{var_name}.field.max_length %}{{form.#{var_name}.field.max_length}}{% endif %}",
           value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
 
-    .ElementForm-errorContent
-      {% if form.#{var_name}.errors %}
-      {% for error in form.#{var_name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 mixin input_search(config)  
   - name = config.name || ''
@@ -308,15 +273,7 @@ mixin input_search(config)
       if(hasIcon)
         span.ElementForm-ico
 
-
-    .ElementForm-errorContent
-      {% if form.#{var_name}.errors %}
-      {% for error in form.#{var_name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 mixin input_file(config)
   - name = config.name || ''
@@ -355,14 +312,7 @@ mixin input_file(config)
           placeholder="#{placeholder}",
           value!="{% if form.#{var_name}.value %}{{form.#{var_name}.value}}{% else %}#{defaultValue}{% endif %}")
 
-    .ElementForm-errorContent
-      {% if form.#{var_name}.errors %}
-      {% for error in form.#{var_name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 mixin list_checkbox(config)  
   - name = config.name || ''
@@ -376,7 +326,7 @@ mixin list_checkbox(config)
     .ElementForm-statement
       label.ElementForm-label=label
       .ElementForm-checkBoxOptions
-        {% for option in form.#{var_name}.field.choices %}
+        | {% for option in form.#{var_name}.field.choices %}
         .ElementForm-checkBoxContent
           input.ElementForm-checkbox(
             name="#{name}",
@@ -384,18 +334,11 @@ mixin list_checkbox(config)
             type="checkbox",
             value="{{option.0}}",
             data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}")
-          label.ElementForm-label.ElementForm-label--checkbox(for="#{name}-{{option.0}}"){{option.1}}
-        {% endfor %} 
-
-    .ElementForm-errorContent
-      {% if form.#{name}.errors %}
-      {% for error in form.#{name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
-
+          label.ElementForm-label.ElementForm-label--checkbox(for="#{name}-{{option.0}}") 
+            | {{option.1}}
+        | {% endfor %} 
+    +error(config)
+    
 mixin captcha(config)
   - name = config.name || ''
   - input_hidden_val = config.input_hidden_val || ''
@@ -423,15 +366,7 @@ mixin captcha(config)
           input(name="#{input}",
                 id="#{input}",
                 type="text")
-
-    .ElementForm-errorContent
-      {% if form.#{var_name}.errors %}
-      {% for error in form.#{var_name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 
 mixin checkbox(config)  
@@ -459,14 +394,7 @@ mixin checkbox(config)
       label.ElementForm-label.ElementForm-label--checkbox(for="#{id}")=label
       if has_link
         a(href="#{link_href}") #{link_text}
-    .ElementForm-errorContent
-      {% if form.#{name}.errors %}
-      {% for error in form.#{name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 mixin list_radiobox(config)  
   - name = config.name || ''
@@ -480,7 +408,7 @@ mixin list_radiobox(config)
     .ElementForm-statement
       label.ElementForm-label--radioBox=label
       .ElementForm-radioBoxOptions
-        {% for option in form.#{var_name}.field.choices %}
+        | {% for option in form.#{var_name}.field.choices %}
         .ElementForm-radioBoxContent          
           input.ElementForm-radiobox(
             name="#{name}",
@@ -489,17 +417,11 @@ mixin list_radiobox(config)
             value="{{option.0}}",
             data-rule-required="{% if form.#{var_name}.field.required %}true{% else %}false{% endif %}"
           )
-          label.ElementForm-label.ElementForm-label--radiobox(for="#{name}-{{option.0}}"){{option.1}}
-        {% endfor %} 
+          label.ElementForm-label.ElementForm-label--radiobox(for="#{name}-{{option.0}}")
+            | {{option.1}}
+        | {% endfor %} 
 
-    .ElementForm-errorContent
-      {% if form.#{name}.errors %}
-      {% for error in form.#{name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 mixin radiobox(config)  
   - name = config.name || ''
@@ -521,14 +443,7 @@ mixin radiobox(config)
           value="#{defaultValue}"
         )      
       label.ElementForm-label--radiobox(for="#{id}")=label
-    .ElementForm-errorContent
-      {% if form.#{var_name}.errors %}
-      {% for error in form.#{var_name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 mixin select(config)  
   - name = config.name || ''
@@ -562,9 +477,9 @@ mixin select(config)
           ) 
             
             if !isAjax
-              {% for item in #{var_name} %}
+              | {% for item in #{var_name} %}
               option.ElementForm-selectOption(value!="{{ item.code }}") {{ item.name }}
-              {% endfor %}
+              | {% endfor %}
 
         else
           select.ElementForm-select-inner(
@@ -575,24 +490,30 @@ mixin select(config)
             data-value="{{form.#{name}.value}}"
           )          
             if !isAjax              
-              {% for item in #{var_name} %}   
-              {% if item.code == form.#{name}.value %}
+              | {% for item in #{var_name} %}   
+              | {% if item.code == form.#{name}.value %}
               option.ElementForm-selectOption(value!="{{ item.code }}", selected) {{ item.name }}                              
-              {% else %}
+              | {% else %}
               option.ElementForm-selectOption(value!="{{ item.code }}") {{ item.name }}
-              {% endif %}
-              {% endfor %}
+              | {% endif %}
+              | {% endfor %}
 
-    .ElementForm-errorContent
-      {% if form.#{var_name}.errors %}
-      {% for error in form.#{var_name}.errors %}
-      label(class="ElementForm-label--error", for="#{id}") {{ error }}
-      {% endfor %}
-      {% else %}
-      //- label(class="ElementForm-label--error", for="#{id}")
-      {% endif %}
+    +error(config)
 
 
+mixin error(config)
+  - id = config.id || name
+  - var_name = config.var_name || name
+
+  .ElementForm-errorContent
+    | {% if form.#{var_name}.errors %}
+    | {% for error in form.#{var_name}.errors %}
+    label(class="ElementForm-label--error", for="#{id}") {{ error }}
+    | {% endfor %}
+    | {% else %}
+    //- label(class="ElementForm-label--error", for="#{id}")
+    | {% endif %}
+  
 - function camelCase(input) { 
     - return input.toLowerCase().replace(/_(.)/g, function(match, group1) {
       - return group1.toUpperCase();
