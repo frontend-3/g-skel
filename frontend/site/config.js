@@ -1,8 +1,26 @@
+var fs = require('fs');
+
 var config = {
   deploy_routes : function () {
     var routes = {},
         base,
         static_path;
+
+    base = this.settings.root_deploy;
+    static_path =  base + 'public/site/';
+    routes = {
+      base: '',
+      templates: base + 'templates/site',
+      static: static_path,
+      styles: static_path + 'styles/',
+      images: static_path + 'images/',
+      fonts: static_path + 'fonts/',
+      videos: static_path + 'videos/',
+      scripts: static_path + 'scripts/',
+      sprites: static_path + 'sprites/',
+      svg: static_path + 'svg/'
+    }
+
     if (this.env == 'dev') {
       base = this.settings.root_deploy;
       static_path =  base + '/static';
@@ -16,25 +34,10 @@ var config = {
         videos: static_path + 'videos/',
         scripts: static_path + '/scripts',
         sprites: static_path + '/sprites',
-        svg: static_path + '/svg'
-      }
-    } else {
-      base = this.settings.root_deploy;
-      static_path =  base + 'public/site/';
-      routes = {
-        base: '',
-        templates: base + 'templates/site',
-        static: static_path,
-        styles: static_path + 'styles/',
-        images: static_path + 'images/',
-        fonts: static_path + 'fonts/',
-        videos: static_path + 'videos/',
-        scripts: static_path + 'scripts/',
-        sprites: static_path + 'sprites/',
-        svg: static_path + '/svg'
+        svg: static_path + 'svg/'
       }
     }
-    return routes;
+     return routes;
   },
   static_url: function(url) {
     if (this.env == 'prod') {
@@ -49,19 +52,19 @@ var config = {
     return this.env;
   },
   notifyConfig : function (options) {
-      var _config = {}
+    var _config = {}
 
-      if (typeof options == "object") {
-        return options
-      }
+    if (typeof options == "object") {
+      return options
+    }
 
-      _config = {
-        message : options,
-        onLast  : true
-      }
+    _config = {
+    message : options,
+    onLast  : true
+    }
 
-      return _config;
-  }
+    return _config;
+  }  
 };
 
 module.exports = config;
